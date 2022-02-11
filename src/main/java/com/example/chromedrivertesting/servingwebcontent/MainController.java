@@ -10,12 +10,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-    public String chrometstart() {
+    public String chrometStarLinux() {
         System.setProperty("webdriver.chrome.driver", "/app/.chromedriver/bin/chromedriver");
         ChromeOptions choptions = new ChromeOptions();
         choptions.setBinary(System.getenv("GOOGLE_CHROME_SHIM"));
         choptions.addArguments("--headless");
         WebDriver webDriver = new ChromeDriver(choptions);
+        webDriver.get("http://pitomnikrazina.ru/");
+        String title = webDriver.getTitle();
+        webDriver.quit();
+        return title;
+    }
+    public String chrometStarWindows() {
+        System.setProperty("webdriver.chrome.driver", "chromedriver/chromedriver.exe");
+        WebDriver webDriver = new ChromeDriver();
         webDriver.get("http://pitomnikrazina.ru/");
         String title = webDriver.getTitle();
         webDriver.quit();
@@ -30,7 +38,12 @@ public class MainController {
     }
     @GetMapping("/1")
     public String chromeStart (@RequestParam(name="name", required=false, defaultValue="Хром запустился!") String name, Model model) {
-        model.addAttribute("name", chrometstart());
+        if (  System.getProperty("os.name").equals("Linux")) {
+            model.addAttribute("name", chrometStarLinux());
+        }
+        if ( System.getProperty("os.name").equals("Windows 11")) {
+            model.addAttribute("name", chrometStarWindows());
+        }
         return "index";
     }
 
