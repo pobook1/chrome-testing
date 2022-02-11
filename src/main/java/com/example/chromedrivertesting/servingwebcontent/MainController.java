@@ -13,7 +13,7 @@ public class MainController {
 
 //    Mapping ----------
     @GetMapping("/")
-    public String home(@RequestParam(name="name", required=false, defaultValue="Server started") String name, Model model) {
+    public String home(@RequestParam(name="name", required=false, defaultValue="Сервер запустился") String name, Model model) {
         model.addAttribute("name", name);
         return "index";
     }
