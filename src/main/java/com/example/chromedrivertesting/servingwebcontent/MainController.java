@@ -1,5 +1,8 @@
 package com.example.chromedrivertesting.servingwebcontent;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     public String chrometstart() {
-        return "chromeOn";
+        System.setProperty("webdriver.chrome.driver", "/app/.chromedriver/bin/chromedriver");
+        ChromeOptions choptions = new ChromeOptions();
+        choptions.setBinary(System.getenv("GOOGLE_CHROME_SHIM"));
+        choptions.addArguments("--headless");
+        WebDriver webDriver = new ChromeDriver(choptions);
+        webDriver.get("http://pitomnikrazina.ru/");
+        String title = webDriver.getTitle();
+        webDriver.quit();
+        return title;
     }
 
 //    Mapping ----------
@@ -19,8 +30,7 @@ public class MainController {
     }
     @GetMapping("/1")
     public String chromeStart (@RequestParam(name="name", required=false, defaultValue="Хром запустился!") String name, Model model) {
-        chrometstart();
-        model.addAttribute("name", name);
+        model.addAttribute("name", chrometstart());
         return "index";
     }
 
