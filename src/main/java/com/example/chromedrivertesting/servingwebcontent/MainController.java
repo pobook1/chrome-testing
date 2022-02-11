@@ -18,7 +18,7 @@ public class MainController {
         return "index";
     }
     @GetMapping("/1")
-    public String chromeStart (@RequestParam(name="name", required=false, defaultValue="Chrome started") String name, Model model) {
+    public String chromeStart (@RequestParam(name="name", required=false, defaultValue="Хром запустился") String name, Model model) {
         chrometstart();
         model.addAttribute("name", name);
         return "index";
