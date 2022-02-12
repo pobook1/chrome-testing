@@ -33,6 +33,7 @@ public class MainController {
 //    Mapping ----------
     @GetMapping("/")
     public String home(@RequestParam(name="name", required=false, defaultValue="Сервер запустился") String name, Model model) {
+        name = System.getenv("GOOGLE_CHROME_SHIM");
         model.addAttribute("name", name);
         return "index";
     }
