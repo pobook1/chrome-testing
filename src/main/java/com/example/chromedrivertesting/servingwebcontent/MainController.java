@@ -16,7 +16,7 @@ public class MainController {
         choptions.setBinary(System.getenv("GOOGLE_CHROME_SHIM"));
         choptions.addArguments("--headless");
         WebDriver webDriver = new ChromeDriver(choptions);
-        webDriver.get("http://pitomnikrazina.ru/");
+        webDriver.get("http://rostok-pitomnik.ru/");
         String title = webDriver.getTitle();
         webDriver.quit();
         return title;
