@@ -16,7 +16,7 @@ public class MainController {
         choptions.setBinary(System.getenv("GOOGLE_CHROME_SHIM"));
         choptions.addArguments("--headless");
         WebDriver webDriver = new ChromeDriver(choptions);
-        webDriver.get("http://rostok-pitomnik.ru/");
+        webDriver.get("https://blog.ted.com/");
         String title = webDriver.getTitle();
         webDriver.quit();
         return title;
@@ -24,7 +24,7 @@ public class MainController {
     public String chromeStarWindows() {
         System.setProperty("webdriver.chrome.driver", "chromedriver/chromedriver.exe");
         WebDriver webDriver = new ChromeDriver();
-        webDriver.get("http://pitomnikrazina.ru/");
+        webDriver.get("https://blog.ted.com/");
         String title = webDriver.getTitle();
         webDriver.quit();
         return title;
